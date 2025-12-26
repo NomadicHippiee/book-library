@@ -30,12 +30,15 @@ main {
   flex: 2;
   outline: 1px dotted red;
   gap: 10px;
+  justify-content: center;
+  align-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .book-card {
+  flex: 0 0 45%;
   outline: 1px dotted red;
   height: 200px;
-  width: 200px;
 }
 
 .new-book-display {
