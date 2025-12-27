@@ -18,6 +18,7 @@ header {
   justify-content: space-between;
   height: 10%;
   align-items: center;
+  padding: 0px 20px;
 }
 
 main {
@@ -33,6 +34,7 @@ main {
   justify-content: center;
   align-content: flex-start;
   flex-wrap: wrap;
+  padding: 20px 0px;
 }
 
 .book-card {
@@ -50,4 +52,16 @@ main {
   position: absolute;
   bottom: 20px;
   right: 20px;
+}
+
+#book-form {
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+}
+
+#dialog-form {
+  display: flex;
+  flex-direction: column;
 }
