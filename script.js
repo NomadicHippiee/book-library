@@ -2,14 +2,10 @@ const library = [];
 const newBookBtn = document.querySelector("#new-book");
 const dialog = document.querySelector("#book-form");
 const closeBtn = document.querySelector("#closeBtn");
+const dialogForm = document.querySelector("#dialog-form");
+const libraryContainer = document.querySelector("#library-container");
 
-newBookBtn.addEventListener("click", () =>{
-    dialog.showModal();
-});
 
-closeBtn.addEventListener("click", () =>{
-    dialog.close();
-});
 
 function Book(title, author, category, pages, isRead = false) {
   this.title = title;
@@ -18,7 +14,7 @@ function Book(title, author, category, pages, isRead = false) {
   this.pages = pages;
   this.isRead = isRead;
   this.id = crypto.randomUUID();
-};
+}
 
 function addBookToLibrary() {
   let title = document.querySelector("#title").value;
@@ -29,7 +25,7 @@ function addBookToLibrary() {
 
   const newBook = new Book(title, author, category, pages, isRead);
   library.push(newBook);
-};
+}
 
 function renderLibrary() {
   const container = document.querySelector("#library-container");
@@ -46,15 +42,43 @@ function renderLibrary() {
     card.innerHTML += `<p><strong>Read:</strong> ${
       book.isRead ? "Yes" : "No"
     }</p>`;
+    card.innerHTML += `<button data-id="${book.id}" class="remove-btn">Remove</button>`;
+    card.innerHTML += `<button data-id="${book.id}" class="toggle-read-btn">${
+      book.isRead ? "Unread" : "Read"
+    }</button>`;
 
     container.appendChild(card);
   });
-};
-// Test books
-// 
-library.push(new Book("The Hobbit", "J.R.R. Tolkien", "Fantasy", 310, false));
-library.push(new Book("1984", "George Orwell", "Dystopia", 328, true));
-library.push(new Book("The Hobbit", "J.R.R. Tolkien", "Fantasy", 310, false));
-library.push(new Book("1984", "George Orwell", "Dystopia", 328, true));
+}
 
-renderLibrary();
+newBookBtn.addEventListener("click", () => {
+  dialog.showModal();
+});
+
+closeBtn.addEventListener("click", () => {
+  dialog.close();
+});
+
+dialogForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  addBookToLibrary();
+  renderLibrary();
+  dialog.close();
+  dialogForm.reset();
+});
+
+libraryContainer.addEventListener("click", (event) =>{
+  if (event.target.classList.contains("remove-btn")) {
+    const id = event.target.dataset.id;
+    const index = library.findIndex(book => book.id === id);
+    library.splice(index, 1);
+    renderLibrary();
+  }
+})
+// Test books
+//
+library.push(new Book("The Hobbit", "J.R.R. Tolkien", "Fantasy", 310, false));
+library.push(new Book("1984", "George Orwell", "Dystopia", 328, true));
+library.push(new Book("The Hobbit", "J.R.R. Tolkien", "Fantasy", 310, false));
+library.push(new Book("1984", "George Orwell", "Dystopia", 328, true));
+renderLibrary()
