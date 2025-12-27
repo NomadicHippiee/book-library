@@ -89,10 +89,9 @@ libraryContainer.addEventListener("click", (event) => {
     renderLibrary();
   }
 });
+
 // Test books
-//
-library.push(new Book("The Hobbit", "J.R.R. Tolkien", "Fantasy", 310, false));
-library.push(new Book("1984", "George Orwell", "Dystopia", 328, true));
+
 library.push(new Book("The Hobbit", "J.R.R. Tolkien", "Fantasy", 310, false));
 library.push(new Book("1984", "George Orwell", "Dystopia", 328, true));
 renderLibrary();
