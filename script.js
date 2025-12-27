@@ -33,21 +33,30 @@ function renderLibrary() {
     const card = document.createElement("div");
     card.classList.add("book-card");
 
-    card.innerHTML += `<p><strong>Title:</strong> ${book.title}</p>`;
-    card.innerHTML += `<p><strong>Author:</strong> ${book.author}</p>`;
-    card.innerHTML += `<p><strong>Pages:</strong> ${book.pages}</p>`;
-    card.innerHTML += `<p><strong>Category:</strong> ${book.category}</p>`;
-    card.innerHTML += `<p><strong>Read:</strong> ${
-      book.isRead ? "Yes" : "No"
-    }</p>`;
-    card.innerHTML += `<button data-id="${book.id}" class="remove-btn">Remove</button>`;
-    card.innerHTML += `<button data-id="${book.id}" class="toggle-read-btn">${
+    card.innerHTML += `<div class="card-info"
+    <p><strong>Title:</strong> ${book.title}</p>
+    <p><strong>Author:</strong> ${book.author}</p>
+    <p><strong>Pages:</strong> ${book.pages}</p>
+    <p><strong>Category:</strong> ${book.category}</p>
+    <p><strong>Read:</strong> ${book.isRead ? "Yes" : "No"}</p>
+    </div>
+    <div class="card-actions">
+    <button data-id="${book.id}" class="remove-btn">Remove</button>
+    <button data-id="${book.id}" class="toggle-read-btn">${
       book.isRead ? "Unread" : "Read"
-    }</button>`;
+    }</button>
+
+    </div>
+
+    
+    
+    
+    
+    `;
 
     container.appendChild(card);
   });
-  document.querySelector('#book-count').textContent = library.length;
+  document.querySelector("#book-count").textContent = library.length;
 }
 
 newBookBtn.addEventListener("click", () => {
