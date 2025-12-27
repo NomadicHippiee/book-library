@@ -6,12 +6,13 @@
 
 body {
   height: 100vh;
+  background-color: #d3d4d9;
 }
 
 header,
 main {
   display: flex;
-  outline: 1px dotted red;
+
 }
 
 header {
@@ -19,6 +20,7 @@ header {
   height: 10%;
   align-items: center;
   padding: 0px 20px;
+  background-color: rgba(156, 113, 120, 0.5);
 }
 
 main {
@@ -29,7 +31,7 @@ main {
 #library-container {
   display: flex;
   flex: 2;
-  outline: 1px dotted red;
+
   gap: 10px;
   justify-content: center;
   align-content: flex-start;
@@ -39,8 +41,21 @@ main {
 
 .book-card {
   flex: 0 0 45%;
-  outline: 1px dotted red;
-  height: 200px;
+
+  height: 150px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 5px;
+  background-color: rgba(75, 136, 162, 0.5);
+
+}
+
+.card-actions {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 }
 
 .new-book-display {
@@ -59,9 +74,13 @@ main {
   top: 50%;
   left: 70%;
   transform: translate(-50%, -50%);
+  background-color: rgba(156, 113, 120, 0.5);
 }
 
 #dialog-form {
   display: flex;
   flex-direction: column;
+  gap: 5px;
+  padding: 10px 5px;
+
 }
