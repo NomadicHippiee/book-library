@@ -5,8 +5,6 @@ const closeBtn = document.querySelector("#closeBtn");
 const dialogForm = document.querySelector("#dialog-form");
 const libraryContainer = document.querySelector("#library-container");
 
-
-
 function Book(title, author, category, pages, isRead = false) {
   this.title = title;
   this.author = author;
@@ -49,6 +47,7 @@ function renderLibrary() {
 
     container.appendChild(card);
   });
+  document.querySelector('#book-count').textContent = library.length;
 }
 
 newBookBtn.addEventListener("click", () => {
@@ -67,18 +66,24 @@ dialogForm.addEventListener("submit", (event) => {
   dialogForm.reset();
 });
 
-libraryContainer.addEventListener("click", (event) =>{
+libraryContainer.addEventListener("click", (event) => {
   if (event.target.classList.contains("remove-btn")) {
     const id = event.target.dataset.id;
-    const index = library.findIndex(book => book.id === id);
+    const index = library.findIndex((book) => book.id === id);
     library.splice(index, 1);
     renderLibrary();
   }
-})
+  if (event.target.classList.contains("toggle-read-btn")) {
+    const id = event.target.dataset.id;
+    const book = library.find((book) => book.id === id);
+    book.isRead = !book.isRead;
+    renderLibrary();
+  }
+});
 // Test books
 //
 library.push(new Book("The Hobbit", "J.R.R. Tolkien", "Fantasy", 310, false));
 library.push(new Book("1984", "George Orwell", "Dystopia", 328, true));
 library.push(new Book("The Hobbit", "J.R.R. Tolkien", "Fantasy", 310, false));
 library.push(new Book("1984", "George Orwell", "Dystopia", 328, true));
-renderLibrary()
+renderLibrary();
