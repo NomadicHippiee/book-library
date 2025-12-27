@@ -1,4 +1,15 @@
 const library = [];
+const newBookBtn = document.querySelector("#new-book");
+const dialog = document.querySelector("#book-form");
+const closeBtn = document.querySelector("#closeBtn");
+
+newBookBtn.addEventListener("click", () =>{
+    dialog.showModal();
+});
+
+closeBtn.addEventListener("click", () =>{
+    dialog.close();
+});
 
 function Book(title, author, category, pages, isRead = false) {
   this.title = title;
@@ -7,7 +18,7 @@ function Book(title, author, category, pages, isRead = false) {
   this.pages = pages;
   this.isRead = isRead;
   this.id = crypto.randomUUID();
-}
+};
 
 function addBookToLibrary() {
   let title = document.querySelector("#title").value;
@@ -18,7 +29,7 @@ function addBookToLibrary() {
 
   const newBook = new Book(title, author, category, pages, isRead);
   library.push(newBook);
-}
+};
 
 function renderLibrary() {
   const container = document.querySelector("#library-container");
@@ -38,9 +49,11 @@ function renderLibrary() {
 
     container.appendChild(card);
   });
-}
+};
 // Test books
 // 
+library.push(new Book("The Hobbit", "J.R.R. Tolkien", "Fantasy", 310, false));
+library.push(new Book("1984", "George Orwell", "Dystopia", 328, true));
 library.push(new Book("The Hobbit", "J.R.R. Tolkien", "Fantasy", 310, false));
 library.push(new Book("1984", "George Orwell", "Dystopia", 328, true));
 
