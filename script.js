@@ -4,6 +4,13 @@ const closeBtn = document.querySelector("#closeBtn");
 const dialogForm = document.querySelector("#dialog-form");
 const libraryContainer = document.querySelector("#library-container");
 
+//Form validation elements
+const titleInput = document.querySelector("#title");
+const authorInput = document.querySelector("#author");
+const categoryInput = document.querySelector("#category");
+const pagesInput = document.querySelector("#pages");
+const readInput = document.querySelector("#read");
+
 class Book {
   constructor(title, author, category, pages, isRead = false) {
     this.title = title;
@@ -58,8 +65,8 @@ class Library {
         <div class="card-actions">
           <button data-id="${book.id}" class="remove-btn">Remove</button>
           <button data-id="${book.id}" class="toggle-read-btn">${
-        book.isRead ? "Unread" : "Read"
-      }</button>
+            book.isRead ? "Unread" : "Read"
+          }</button>
         </div>
       `;
 
@@ -82,14 +89,49 @@ closeBtn.addEventListener("click", () => {
 
 dialogForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  
- 
-  const title = document.querySelector("#title").value;
-  const author = document.querySelector("#author").value;
-  const category = document.querySelector("#category").value;
-  const pages = document.querySelector("#pages").value;
-  const isRead = document.querySelector("#read").checked;
-  
+
+  // Clear all custom validity messages for next submission
+  titleInput.setCustomValidity("");
+  authorInput.setCustomValidity("");
+  categoryInput.setCustomValidity("");
+  pagesInput.setCustomValidity("");
+
+  //Form Validation
+
+  if (titleInput.value.trim() === "") {
+    titleInput.setCustomValidity("The title must be filled!");
+  } else {
+    titleInput.setCustomValidity("");
+  }
+
+  if (authorInput.value.trim() === "") {
+    authorInput.setCustomValidity("The author name must be filled!");
+  } else {
+    authorInput.setCustomValidity("");
+  }
+
+  if (categoryInput.value.trim() === "") {
+    categoryInput.setCustomValidity("The book category must be filled!");
+  } else {
+    categoryInput.setCustomValidity("");
+  }
+
+  if (pagesInput.value.trim() === "") {
+    pagesInput.setCustomValidity("The total pages must be filled!");
+  } else {
+    pagesInput.setCustomValidity("");
+  }
+
+  if (!dialogForm.reportValidity()) {
+    return;
+  }
+
+  const title = titleInput.value;
+  const author = authorInput.value;
+  const category = categoryInput.value;
+  const pages = pagesInput.value;
+  const isRead = readInput.checked;
+
   library.addBook(title, author, category, pages, isRead);
   library.render();
 
